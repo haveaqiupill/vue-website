@@ -1,4 +1,4 @@
-# quiz
+# Sample Quiz Website
 
 ## Project setup
 ```
