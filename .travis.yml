@@ -1,26 +1,15 @@
 language: node_js
 node_js:
-  - "8.6.0"
-  - "node"
-install:
-  # Use npm 5.7.x since it has introduced `npm ci`
-  - if [[ `npm -v` != 5.7* ]]; then npm install -g npm@'>=5.7.1'; fi
-  - npm ci
-branches:
-  except:
-    - gh-pages
-stages:
-  - lint
-  - build
-jobs:
-  include:
-    - stage: lint
-      script:
-        # Run linter
-        - npm run lint
-    - stage: build
-      script:
-        # Build all
-        - npm run build:docs
-        - npm run build:system
-        - npm run build:app
+ - "node"
+
+cache: npm
+
+script: npm run build
+
+deploy:
+ provider: pages
+ skip_cleanup: true
+ github_token: $GITHUB_TOKEN
+ local_dir: dist
+ on:
+   branch: master
